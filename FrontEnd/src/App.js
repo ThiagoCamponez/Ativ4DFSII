@@ -1,11 +1,11 @@
-import TelaCadastroProduto from "./componentes/Telas/TelaCadastroProduto";
-import TelaCadastroCategoria from "./componentes/Telas/TelaCadastroCategoria";
+import TelaCadastroDisciplina from "./componentes/Telas/TelaCadastroDisciplina";
+import TelaCadastroEspecialidade from "./componentes/Telas/TelaCadastroEspecialidade";
 import TelaMenu from "./componentes/Telas/TelaMenu";
 import Tela404 from "./componentes/Telas/Tela404";
 import TelaLogin from "./componentes/Telas/TelaLogin";
+import TelaCadastroMatricula from "./componentes/Telas/TelaCadastroMatricula"; // Alterado para Matricula
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, createContext } from "react";
-import TelaVenda from "./componentes/Telas/TelaVenda";
 
 export const ContextoUsuarioLogado = createContext(null);
 
@@ -26,9 +26,9 @@ function App() {
       <ContextoUsuarioLogado.Provider value={{ usuarioLogado, setUsuarioLogado }}>
         <BrowserRouter>
           <Routes>
-            <Route path="/produto" element={<TelaCadastroProduto />} />
-            <Route path="/categoria" element={<TelaCadastroCategoria />} />
-            <Route path="/pedido" element={<TelaVenda />} />
+            <Route path="/disciplina" element={<TelaCadastroDisciplina />} /> {/* Alterado para Disciplina */}
+            <Route path="/especialidade" element={<TelaCadastroEspecialidade />} /> {/* Alterado para Especialidade */}
+            <Route path="/matricula" element={<TelaCadastroMatricula />} /> {/* Alterado para Matricula */}
             <Route path="/" element={<TelaMenu />} />
             <Route path="*" element={<Tela404 />} />
           </Routes>

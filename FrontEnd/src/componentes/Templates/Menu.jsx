@@ -2,10 +2,9 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Menu(props) {
-
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
@@ -14,21 +13,18 @@ export default function Menu(props) {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <NavDropdown title="Cadastros" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#" as={Link} to="/cliente">Clientes</NavDropdown.Item>
-                            <NavDropdown.Item href="#" as={Link} to="/fornecedor">Fornecedores</NavDropdown.Item>
-                            <NavDropdown.Item href="#" as={Link} to="/produto">Produtos</NavDropdown.Item>
-                            <NavDropdown.Item href="#" as={Link} to="/categoria">Categorias</NavDropdown.Item>
+                            <NavDropdown.Item href="#" as={Link} to="/cliente">Alunos</NavDropdown.Item>
+                            <NavDropdown.Item href="#" as={Link} to="/especialidade">Especialidades</NavDropdown.Item>
+                            <NavDropdown.Item href="#" as={Link} to="/disciplina">Disciplinas</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Operações" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Compra</NavDropdown.Item>
-                            <NavDropdown.Item href="#" as={Link} to="/pedido">Venda</NavDropdown.Item>
+                            <NavDropdown.Item href="#" as={Link} to="/matricula">Matrículas</NavDropdown.Item>
                         </NavDropdown>
                         <NavDropdown title="Relatórios" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Clientes</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.1">Fornecedores</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.1">Estoque</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.1">Vendas</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.1">Compras</NavDropdown.Item>
+                            <NavDropdown.Item href="#">Alunos</NavDropdown.Item>
+                            <NavDropdown.Item href="#">Especialidades</NavDropdown.Item>
+                            <NavDropdown.Item href="#">Disciplinas</NavDropdown.Item>
+                            <NavDropdown.Item href="#">Matrículas</NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link href="#home">Sobre</Nav.Link>
                         <Nav.Link href="#home">Sair</Nav.Link>

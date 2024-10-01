@@ -1,42 +1,44 @@
 import Pagina from "../Templates/Pagina";
-import FormCadVenda from "./Formularios/FormCadVenda";
-import TabelaVendas from "./Tabelas/TabelaVendas";
+import FormCadMatricula from "./Formularios/FormCadMatricula";
+import TabelaMatriculas from "./Tabelas/TabelaMatriculas";
 import { useState, useEffect, useContext } from "react";
-import { buscaTodosPedidos } from "../../servicos/pedidoService";
+import { buscaTodasMatriculas } from "../../servicos/matriculaService"; // Certifique-se de ter o service correto para matriculas
 import { ContextoUsuarioLogado } from "../../App";
 
-export default function TelaVenda(props) {
+export default function TelaMatricula(props) {
 
     const contextoUsuario = useContext(ContextoUsuarioLogado);
 
     const [exibirTabela, setExibirTabela] = useState(true);
-    const [atualizarTela, setAtualizarTela] = useState(false); // Novo estado para atualização da tela
-    const [listaDeVendas, setListaDeVendas] = useState([]);
+    const [atualizarTela, setAtualizarTela] = useState(false); // Estado para atualizar a tela
+    const [listaDeMatriculas, setListaDeMatriculas] = useState([]); // Ajustado para "matriculas"
 
     useEffect(() => {
         const token = contextoUsuario.usuarioLogado.token;
-        buscaTodosPedidos(token).then((resposta) => {
+        buscaTodasMatriculas(token).then((resposta) => {
             if (resposta.status) {
-                setListaDeVendas(resposta.listaPedidos); // Corrigido: status == true
+                setListaDeMatriculas(resposta.listaMatriculas); // Corrigido para listaMatriculas
+            } else {
+                alert(resposta.mensagem);
             }
         }).catch((erro) => {
             alert("Erro ao enviar a requisição: " + erro.message);
         });
-    }, [exibirTabela, atualizarTela]); // Atualizar a lista quando atualizarTela mudar
+    }, [contextoUsuario.usuarioLogado.token, exibirTabela]); // Dependência do token
 
     return (
         <Pagina>
-            <h1 className="mb-02 text-center">Gestão de Vendas</h1>
+            <h1 className="mb-02 text-center">Gestão de Matrículas</h1>
             {
                 exibirTabela ? 
-                <TabelaVendas 
+                <TabelaMatriculas 
                     exibirTabela={exibirTabela} 
                     setExibirTabela={setExibirTabela}
-                    listaDeVendas={listaDeVendas}
+                    listaDeMatriculas={listaDeMatriculas} // Ajustado para "matriculas"
                     setAtualizarTela={setAtualizarTela} // Passar prop para atualizar a tela
                 /> 
                 : 
-                <FormCadVenda 
+                <FormCadMatricula 
                     exibirTabela={exibirTabela} 
                     setExibirTabela={setExibirTabela}
                     setAtualizarTela={setAtualizarTela} // Passar prop para atualizar a tela após cadastro

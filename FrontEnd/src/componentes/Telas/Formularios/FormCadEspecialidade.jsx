@@ -1,16 +1,16 @@
 import { useState, useContext } from 'react';
 import { Container, Form, Row, Col, Button, FloatingLabel } from 'react-bootstrap';
 import { ContextoUsuarioLogado } from '../../../App';
-import { gravar, alterar } from '../../../servicos/categoriaService';
+import { gravar, alterar } from '../../../servicos/especialidadeService';
 
-export default function FormCadCategorias(props) {
-    const [categoria, setCategoria] = useState(props.categoriaSelecionada);
+export default function FormCadEspecialidade(props) {
+    const [especialidade, setEspecialidade] = useState(props.especialidadeSelecionada);
     const [validado, setValidado] = useState(false);
     const contextoUsuario = useContext(ContextoUsuarioLogado);
 
     function manipularMudanca(evento) {
-        setCategoria({
-            ...categoria,
+        setEspecialidade({
+            ...especialidade,
             [evento.target.name]: evento.target.value
         });
     }
@@ -20,7 +20,7 @@ export default function FormCadCategorias(props) {
         const formulario = evento.currentTarget;
         if (formulario.checkValidity()) {
             if (!props.modoEdicao) {
-                gravar(categoria,token).then((resposta) => {
+                gravar(especialidade, token).then((resposta) => {
                     alert(resposta.mensagem);
                     props.setExibirTabela(true);
                 }).catch((erro) => {
@@ -28,19 +28,17 @@ export default function FormCadCategorias(props) {
                 });
             }
             else {
-                alterar(categoria, token).then((resposta) => {
+                alterar(especialidade, token).then(() => {
                     alert("Atualizado com sucesso!");
                     props.setModoEdicao(false);
-                    props.setCategoriaSelecionada( { codigo: 0, descricao: "" });
+                    props.setEspecialidadeSelecionada({ codigo: 0, descricao: "" });
 
                     setValidado(false);
                 }).catch((erro) => {
                     alert(erro.message);
                 });
             }
-
-        }
-        else{
+        } else {
             setValidado(true);
         }
 
@@ -58,17 +56,16 @@ export default function FormCadCategorias(props) {
                                 label="Código:"
                                 className="mb-3"
                             >
-
                                 <Form.Control
                                     type="text"
                                     placeholder="0"
                                     id="codigo"
                                     name="codigo"
                                     onChange={manipularMudanca}
-                                    value={categoria.codigo}
+                                    value={especialidade.codigo}
                                     disabled />
                             </FloatingLabel>
-                            <Form.Control.Feedback type="invalid">Informe o código da categoria!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Informe o código da especialidade!</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
                 </Row>
@@ -76,19 +73,19 @@ export default function FormCadCategorias(props) {
                     <Col>
                         <Form.Group>
                             <FloatingLabel
-                                label="Categoria:"
+                                label="Especialidade:"
                                 className="mb-3"
                             >
                                 <Form.Control
                                     type="text"
-                                    placeholder="Informe a descrição da categoria"
+                                    placeholder="Informe a descrição da especialidade"
                                     id="descricao"
                                     name="descricao"
                                     onChange={manipularMudanca}
-                                    value={categoria.descricao}
+                                    value={especialidade.descricao}
                                     required />
                             </FloatingLabel>
-                            <Form.Control.Feedback type="invalid">Informe a descrição da categoria!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Informe a descrição da especialidade!</Form.Control.Feedback>
                         </Form.Group>
                     </Col>
                 </Row>
@@ -105,5 +102,4 @@ export default function FormCadCategorias(props) {
             </Form>
         </Container>
     );
-
 }

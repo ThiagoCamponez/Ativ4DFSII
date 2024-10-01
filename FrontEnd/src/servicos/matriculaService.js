@@ -1,6 +1,6 @@
-const urlBase = "http://localhost:4000/pedido";
+const urlBase = "http://localhost:4000/matricula";
 
-export async function gravarPedido(pedido, token) {
+export async function gravarMatricula(matricula, token) {
     const resposta = await fetch(urlBase, {
         method: "POST",
         headers: {
@@ -8,12 +8,12 @@ export async function gravarPedido(pedido, token) {
             "Authorization": token
         },
         credentials: 'include',
-        body: JSON.stringify(pedido)
+        body: JSON.stringify(matricula)
     });
     return await resposta.json();
 }
 
-export async function buscaTodosPedidos(token) {
+export async function buscaTodasMatriculas(token) {
     const resposta = await fetch(urlBase, {
         method: "GET",
         headers: {
@@ -24,8 +24,8 @@ export async function buscaTodosPedidos(token) {
     return await resposta.json();
 }
 
-export async function excluir(pedido, token) {
-    const resposta = await fetch(`${urlBase}/${pedido.codigo}`, {  // Adiciona o ID na URL
+export async function excluirMatricula(matricula, token) {
+    const resposta = await fetch(`${urlBase}/${matricula.codigo}`, {  // Adiciona o ID na URL
         method: "DELETE",
         headers: {
             "Authorization": token

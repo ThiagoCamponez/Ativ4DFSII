@@ -1,6 +1,6 @@
-export async function buscarTodosClientes(token){
+export async function buscarTodosAlunos(token) {
     
-    const resposta = await fetch("http://localhost:4000/cliente",
+    const resposta = await fetch("http://localhost:4000/aluno",
         {
             method: "GET",
             headers: {
