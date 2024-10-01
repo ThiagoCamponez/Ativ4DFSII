@@ -1,14 +1,15 @@
-import PedidoDAO from "../Persistencia/pedidoDAO.js";
-export default class Pedido {
+import MatriculaDAO from "../Persistencia/matriculaDAO.js";
+
+export default class Matricula {
     #codigo;
-    #cliente;
+    #aluno;
     #data;
     #total;
     #itens;
 
-    constructor(codigo, cliente, data,  total, itens) {
+    constructor(codigo, aluno, data, total, itens) {
         this.#codigo = codigo;
-        this.#cliente = cliente;
+        this.#aluno = aluno;
         this.#data = data;
         this.#total = total;
         this.#itens = itens;
@@ -29,14 +30,13 @@ export default class Pedido {
         }
     }
 
-    // Código do Cliente
-    get cliente() {
-        return this.#cliente;
+    // Código do Aluno
+    get aluno() {
+        return this.#aluno;
     }
 
-    set cliente(novocliente) {
-        this.#cliente = novocliente;
-        
+    set aluno(novoAluno) {
+        this.#aluno = novoAluno;
     }
 
     // Data
@@ -48,7 +48,7 @@ export default class Pedido {
         this.#data = novaData;
     }
 
-    // Total do Pedido
+    // Total da Matrícula
     get total() {
         return this.#total;
     }
@@ -57,45 +57,44 @@ export default class Pedido {
         this.#total = novoTotal;
     }
 
-    // Produtos
+    // Disciplinas
     get itens() {
         return this.#itens;
     }
 
-    set produtos(novosItens) {
+    set itens(novosItens) {
         this.#itens = novosItens;
     }
+
     // JSON
     toJSON() {
         return {
             'codigo': this.#codigo,
-            'cliente': this.#cliente,
+            'aluno': this.#aluno,
             'data': this.#data,
             'total': this.#total,
-            'produtos': this.#itens
-
+            'itens': this.#itens
         };
     }
 
     async gravar() {
-        const pedidoDAO = new PedidoDAO();
-        this.codigo = await pedidoDAO.gravar(this);
+        const matriculaDAO = new MatriculaDAO();
+        this.codigo = await matriculaDAO.gravar(this);
     }
 
     async atualizar() {
-        const pedidoDAO = new PedidoDAO();
-        await pedidoDAO.alterar(this);
+        const matriculaDAO = new MatriculaDAO();
+        await matriculaDAO.alterar(this);
     }
 
     async apagar() {
-        const pedidoDAO = new PedidoDAO();
-        await pedidoDAO.deletar(this);
+        const matriculaDAO = new MatriculaDAO();
+        await matriculaDAO.deletar(this);
     }
 
     async consultar(termoBusca) {
-        const pedidoDAO = new PedidoDAO();
-        const listaPedidos = await pedidoDAO.consultar(termoBusca);
-        return listaPedidos;
+        const matriculaDAO = new MatriculaDAO();
+        const listaMatriculas = await matriculaDAO.consultar(termoBusca);
+        return listaMatriculas;
     }
-    
 }

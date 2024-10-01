@@ -9,7 +9,7 @@ export default async function conectar(){
             host: 'localhost',
             user: process.env.USUARIO_BD, //jamais faça isso
             password:process.env.SENHA_BD,  //never, nunca, jamais
-            database: 'sistema',
+            database: 'sistemaensino',
             connectionLimit: 50,
             maxIdle: 30, // max idle connections, the default value is the same as `connectionLimit`
             idleTimeout: 60000, // idle connections timeout, in milliseconds, the default value 60000
